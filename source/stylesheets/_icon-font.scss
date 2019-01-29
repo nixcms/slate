@@ -1,38 +1,47 @@
 @font-face {
-  font-family: 'slate';
-  src:font-url('slate.eot?-syv14m');
-  src:font-url('slate.eot?#iefix-syv14m') format('embedded-opentype'),
-    font-url('slate.woff2?-syv14m') format('woff2'),
-    font-url('slate.woff?-syv14m') format('woff'),
-    font-url('slate.ttf?-syv14m') format('truetype'),
-    font-url('slate.svg?-syv14m#slate') format('svg');
+  font-family: 'icons';
+  src:  url('../fonts/icons.eot?uo3oai');
+  src:  url('../fonts/icons.eot?uo3oai#iefix') format('embedded-opentype'),
+  url('../fonts/icons.ttf?uo3oai') format('truetype'),
+  url('../fonts/icons.woff?uo3oai') format('woff'),
+  url('../fonts/icons.svg?uo3oai#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-%icon {
-  font-family: 'slate';
+%icon{
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icons' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
+  font-size: 19px;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-%icon-exclamation-sign {
+%icon-search:before {
   @extend %icon;
-  content: "\e600";
+  content: "\e900";
+  color: #cec6e2;
 }
-%icon-info-sign {
+%icon-exclamation-sign:before {
   @extend %icon;
-  content: "\e602";
+  content: "\e901";
+  color: #5f5f6a;
 }
-%icon-ok-sign {
+%icon-info-sign:before {
   @extend %icon;
-  content: "\e606";
+  content: "\e902";
+  color: #5f5f6a;
 }
-%icon-search {
+%icon-ok-sign:before {
   @extend %icon;
-  content: "\e607";
+  content: "\e903";
+  color: #21c4a0;
 }
