@@ -44,61 +44,29 @@ under the License.
   </head>
 
   <body class="<%= page_classes %>" data-languages="<%=h language_tabs.map{ |lang| lang.is_a?(Hash) ? lang.keys.first : lang }.to_json %>">
-    <a href="#" id="nav-button">
-      <span>
-        NAV
-        <%= image_tag('navbar.png') %>
-      </span>
-    </a>
-    <div class="toc-wrapper">
-      <%= image_tag "logo.png", class: 'logo' %>
-      <% if language_tabs.any? %>
-        <div class="lang-selector">
-          <% language_tabs.each do |lang| %>
-            <% if lang.is_a? Hash %>
-              <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
-            <% else %>
-              <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
-      <% if current_page.data.search %>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
-      <% end %>
-      <ul id="toc" class="toc-list-h1">
-        <% toc_data(page_content).each do |h1| %>
-          <li>
-            <a href="#<%= h1[:id] %>" class="toc-h1 toc-link" data-title="<%= h1[:title] %>"><%= h1[:content] %></a>
-            <% if h1[:children].length > 0 %>
-              <ul class="toc-list-h2">
-                <% h1[:children].each do |h2| %>
-                  <li>
-                    <a href="#<%= h2[:id] %>" class="toc-h2 toc-link" data-title="<%= h2[:title] %>"><%= h2[:content] %></a>
-                  </li>
-                <% end %>
-              </ul>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-      <% if current_page.data.toc_footers %>
-        <ul class="toc-footer">
-          <% current_page.data.toc_footers.each do |footer| %>
-            <li><%= footer %></li>
-          <% end %>
-        </ul>
-      <% end %>
+  <a href="#" id="nav-button">
+        <div class="burger-container">
+              <div class="burger"></div>
+         </div>
+      </a>
+  <header class="header">
+    <div class="header-logo">
+        <%= image_tag "logo.png", class: 'logo' %>
     </div>
-    <div class="page-wrapper">
-      <div class="dark-box"></div>
-      <div class="content">
-        <%= page_content %>
-      </div>
-      <div class="dark-box">
+    <div class="header-title">API Documentation</div>
+
+    <ul class="header-nav">
+        <li><a href="#">Text link 1</a></li>
+        <li><a href="#">Text link 1</a></li>
+        <li><a href="#">Text link 1</a></li>
+        <li><button type="button" class="btn btn--white">Sign Up</button></li>
+    </ul>
+  </header>
+  <div class="wrapper">
+   <div class="toc-wrapper">
+
+        <div class="toc-title">made for <span>developers</span></div>
+
         <% if language_tabs.any? %>
           <div class="lang-selector">
             <% language_tabs.each do |lang| %>
@@ -110,7 +78,82 @@ under the License.
             <% end %>
           </div>
         <% end %>
+        <div class="toc-list-title">Topics</div>
+        <ul id="toc" class="toc-list-h1">
+          <% toc_data(page_content).each do |h1| %>
+            <li>
+              <a href="#<%= h1[:id] %>" class="toc-h1 toc-link" data-title="<%= h1[:title] %>"><%= h1[:content] %></a>
+              <% if h1[:children].length > 0 %>
+                <ul class="toc-list-h2">
+                  <% h1[:children].each do |h2| %>
+                    <li>
+                      <a href="#<%= h2[:id] %>" class="toc-h2 toc-link" data-title="<%= h2[:title] %>"><%= h2[:content] %></a>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+         <% if current_page.data.search %>
+                <div class="search">
+                  <input type="text" class="search" id="input-search" placeholder="Search">
+                  <span class="icon-search"></span>
+                </div>
+                <div class="search-wrapper">
+                    <div class="search-text"><span>Highlighted on page</span></div>
+                    <ul class="search-results"></ul>
+                </div>
+              <% end %>
+
+
+                <ul class="header-nav">
+                    <li><a href="#">Text link 1</a></li>
+                    <li><a href="#">Text link 1</a></li>
+                    <li><a href="#">Text link 1</a></li>
+                    <li><button type="button" class="btn btn--orange">Sign Up</button></li>
+                </ul>
+        <% if current_page.data.toc_footers %>
+          <ul class="toc-footer">
+            <% current_page.data.toc_footers.each do |footer| %>
+              <li><%= footer %></li>
+            <% end %>
+          </ul>
+        <% end %>
       </div>
-    </div>
+      <div class="page-wrapper">
+        <div class="dark-box"></div>
+        <div class="content">
+            <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Developers</a></li>
+                <li>API Documentation</li>
+            </ul>
+          <%= page_content %>
+        </div>
+        <div class="dark-box">
+          <% if language_tabs.any? %>
+            <div class="lang-selector">
+              <% language_tabs.each do |lang| %>
+                <% if lang.is_a? Hash %>
+                  <a href="#" data-language-name="<%= lang.keys.first %>"><%= lang.values.first %></a>
+                <% else %>
+                  <a href="#" data-language-name="<%= lang %>"><%= lang %></a>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="footer-copyright">&copy; Copyright 2019 tyntec</div>
+        <ul class="footer-nav">
+            <li><a href="#">Imprint</a></li>
+            <li><a href="#">Disclaimer</a></li>
+            <li><a href="#">Data Privacy Statement</a></li>
+            <li><a href="#">Support</a></li>
+         </ul>
+       </footer>
+  </div>
   </body>
 </html>
