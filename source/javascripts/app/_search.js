@@ -4,7 +4,7 @@
 ;(function () {
   'use strict';
 
-  var content, searchResults;
+  var content, searchResults, searchWrapper;
   var highlightOpts = { element: 'span', className: 'search-highlight' };
   var searchDelay = 0;
   var timeoutHandle = 0;
@@ -18,6 +18,22 @@
 
   $(populate);
   $(bind);
+  $(goToSearch);
+
+  function goToSearch() {
+    var titleHeight, titleListHeight, menuHeight, headerHeight, offset;
+
+    $('#input-search').on('keyup', function() {
+      titleHeight = $('.toc-title').height();
+      titleListHeight = $('.toc-list-title').height();
+      menuHeight = $('#toc').height();
+      headerHeight = $('.header').height();
+      offset = 20 + titleHeight + titleListHeight + menuHeight + headerHeight;
+      $('.toc-wrapper').animate({
+        scrollTop: offset
+      }, 500);
+    });
+  }
 
   function populate() {
     $('h1, h2').each(function() {
@@ -41,6 +57,7 @@
   function bind() {
     content = $('.content');
     searchResults = $('.search-results');
+    searchWrapper = $('.search-wrapper');
 
     $('#input-search').on('keyup',function(e) {
       var wait = function() {
@@ -60,7 +77,7 @@
     var searchInput = $('#input-search')[0];
 
     unhighlight();
-    searchResults.addClass('visible');
+    searchWrapper.addClass('visible');
 
     // ESC clears the field
     if (event.keyCode === 27) searchInput.value = '';
@@ -83,7 +100,7 @@
       }
     } else {
       unhighlight();
-      searchResults.removeClass('visible');
+      searchWrapper.removeClass('visible');
     }
   }
 
